@@ -1,0 +1,21 @@
+GEM
+  remote: https://rubygems.org/
+  specs:
+    dotenv (2.7.6)
+    everything-core (0.0.13)
+      dotenv (~> 2.1)
+      fastenv (= 0.0.3)
+    fastenv (0.0.3)
+    thor (1.1.0)
+
+PLATFORMS
+  x86_64-darwin-20
+
+DEPENDENCIES
+  dotenv
+  everything-core
+  fastenv
+  thor
+
+BUNDLED WITH
+   2.2.27
