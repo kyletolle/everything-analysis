@@ -9,6 +9,8 @@ Dotenv.load
 module Everything
   module Analytics
     class CharacterFrequency
+      CHARACTERS_TO_IGNORE = [' ', "\n"]
+
       attr_accessor :character_frequency, :piece_markdown, :piece_title
 
       def initialize(piece_title:, piece_markdown:)
@@ -18,11 +20,12 @@ module Everything
 
       def run
         self.character_frequency = {}
-        piece_markdown.each_char do |char|
+        characters_to_analyze.each do |char|
           character_frequency[char] ||= 0
           character_frequency[char] += 1
         end
-        return self
+
+        self
       end
 
       def to_s
@@ -33,6 +36,10 @@ module Everything
             "`#{char}` was used #{times_used} times"
           end
           .map{ |line| "  #{line}" }
+      end
+
+      def characters_to_analyze
+        piece_markdown.each_char.reject { |char| CHARACTERS_TO_IGNORE.include?(char) }
       end
     end
   end
@@ -88,6 +95,12 @@ module Everything
 
     def analysis_to_perform
       [Everything::Analytics::CharacterFrequency]
+      # What other analytics?
+      # Percentage characters that's punctuation
+      # Percentage whitespace
+      # Number of words
+      # Number of sentences
+      # Number of paragraphs
     end
   end
 end
