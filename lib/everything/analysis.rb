@@ -13,6 +13,10 @@ module Everything
 
       attr_accessor :character_frequency, :piece_markdown, :piece_title
 
+      def name
+        'Character Frequency'
+      end
+
       def initialize(piece_title:, piece_markdown:)
         self.piece_markdown = piece_markdown
         self.piece_title = piece_title
@@ -29,13 +33,15 @@ module Everything
       end
 
       def to_s
-        character_frequency
+        charcater_results = character_frequency
           .sort_by { |_,times_used| times_used }
           .reverse
           .map do |char, times_used|
             "`#{char}` was used #{times_used} times"
           end
-          .map{ |line| "  #{line}" }
+          .map{ |line| "    #{line}" }
+          .join("\n")
+        "  #{name}:\n#{charcater_results}"
       end
 
       def characters_to_analyze
@@ -54,7 +60,6 @@ module Everything
         piece_title = piece_analytics[:piece_title]
         analytics_result = piece_analytics[:analytics]
           .map(&:to_s)
-          .join("\n")
 
         puts "Analysis for Piece Titled: `#{piece_title}`"
         puts analytics_result
