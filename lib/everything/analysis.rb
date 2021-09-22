@@ -147,11 +147,16 @@ module Everything
         Everything::Analytics::WhitespacePercentage,
       ]
       # What other analytics?
-      # Percentage characters that's punctuation
-      # Percentage whitespace
+      # Percentage of characters that is punctuation
       # Number of words
       # Number of sentences
       # Number of paragraphs
+      # Show character frequency as % instead of just raw total
+      # Compare character frequency % for myself to the global %s to see what
+      # characters I use more than other writers. Idea from Zach
+      # Most common words per chapter - also from Zach
+      # He mentions the plot he made from
+      # https://github.com/ZWMiller/PythonProjects/blob/master/wordCounter/img/toaesWordCountPlot.png
     end
   end
 end
