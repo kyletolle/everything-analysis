@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Everything
   class Analysis
     module Analytics
@@ -29,7 +31,7 @@ module Everything
         end
 
         def to_s
-          charcater_results = character_frequency
+          character_results = character_frequency
             .sort_by { |_,times_used| times_used }
             .reverse
             .map do |char, times_used|
@@ -41,7 +43,7 @@ module Everything
 
           "  #{name}:\n" \
           "    Total characters: #{total_character_count}\n" \
-          "#{charcater_results}"
+          "#{character_results}"
         end
 
         def characters_to_analyze

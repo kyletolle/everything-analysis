@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Everything
   class Analysis
     module Analytics
