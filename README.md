@@ -12,7 +12,11 @@ bundle install
 Must define these environment variables:
 
 - `EVERYTHING_PATH` - the full path to your everything repo.
-- `PIECE_RELATIVE_PATH_TO_ANALYZE` - the relative path a specific everything piece that will, where the path is relative to the EVERYTHING_PATH
+  - Something like `"/Users/kyle/git/everything"`
+- `PIECES_RELATIVE_PATH` - the relative path to a folder in the everything repo where exists pieces you'd like to analyze
+  - Something like `"novels/thoughts-of-an-eaten-sun/v5/"`
+- `PIECES_GLOBS` - a Ruby glob string of pieces you'd like to analyze, separated by colons
+  - Something like `"ch?:ch??"`, which finds pieces named `ch1` and `ch10` but not `character-info`
 
 You can create a `.env` file with these values, if you want. Dotenv will automatically load the `.env` file.
 
