@@ -19,7 +19,8 @@ module Everything
           .map(&:to_s)
           .join("\n\n")
 
-        "Analysis for Piece Titled: `#{piece_title}`\n\n" + analytics_result
+        "Analysis for Piece Titled: `#{piece_title}`\n\n" \
+        "#{analytics_result}\n\n"
       end
     end
 
@@ -50,9 +51,12 @@ module Everything
     end
 
     def piece_paths
-      [
-        Pathname.new(Fastenv.everything_path).join(Fastenv.piece_relative_path_to_analyze)
-      ]
+      pieces_path = Pathname.new(Fastenv.everything_path).join(Fastenv.pieces_relative_path)
+      Fastenv.pieces_globs.split(':').map do |glob|
+        Dir.glob(glob, base: pieces_path).map do |path|
+          Pathname.new(pieces_path).join(path)
+        end
+      end.flatten
     end
 
     def analysis_to_perform
