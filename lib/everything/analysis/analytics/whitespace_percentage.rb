@@ -40,7 +40,10 @@ module Everything
           percentage_whitespace = ((whitespace / total) * 100).ceil(1)
           percentage_non_whitespace = ((non_whitespace / total) * 100).ceil(1)
 
-          "  #{name}\n    % Whitespace: #{percentage_whitespace}\n    % Non-Whitespace: #{percentage_non_whitespace}"
+          "  #{name}\n" +
+          "    Total: #{total}\n" +
+          "    Whitespace: #{whitespace} (#{percentage_whitespace}%)\n" +
+          "    Non-Whitespace: #{non_whitespace} (#{percentage_non_whitespace}%)"
         end
       end
     end
