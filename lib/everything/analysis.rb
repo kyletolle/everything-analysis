@@ -10,6 +10,7 @@ module Everything
   class Analysis
     def run_and_print
       puts analytics_results
+      puts all_results
     end
 
     def analytics_results
@@ -24,6 +25,16 @@ module Everything
       end
     end
 
+    def all_results
+      piece_title = completed_analytics_for_all[:piece_title]
+      analytics_result = completed_analytics_for_all[:analytics]
+        .map(&:to_s)
+        .join("\n\n")
+
+      "Analysis for Piece Titled: `#{piece_title}`\n\n" \
+      "#{analytics_result}\n\n"
+    end
+
     def completed_analytics
       pieces_data_to_analyze.map do |piece_data|
         piece_title = piece_data[:piece_title]
@@ -35,6 +46,15 @@ module Everything
       end.flatten
     end
 
+    def completed_analytics_for_all
+      piece_title = all_pieces_data[:piece_title]
+      piece_markdown = all_pieces_data[:piece_markdown]
+      analytics = analysis_to_perform.map do |analysis_klass|
+        analysis_klass.new(piece_title: piece_title, piece_markdown: piece_markdown).run
+      end
+      { piece_title: piece_title, analytics: analytics }
+    end
+
     def pieces_data_to_analyze
       pieces_to_analyze.map do |piece|
         {
@@ -42,6 +62,14 @@ module Everything
           piece_markdown: piece.raw_markdown
         }
       end
+    end
+
+    def all_pieces_data
+      all_markdown = pieces_to_analyze.map(&:raw_markdown).join('')
+      {
+        piece_title: "All Pieces at Once",
+        piece_markdown: all_markdown
+      }
     end
 
     def pieces_to_analyze
