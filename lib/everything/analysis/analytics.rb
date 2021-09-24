@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 
 module Everything
   class Analysis
@@ -8,3 +9,4 @@ end
 
 require_relative './analytics/character_frequency'
 require_relative './analytics/whitespace_percentage'
+require_relative './analytics/word_frequency'
