@@ -5,6 +5,8 @@ module Everything
     module Analytics
       class WordFrequency
         NON_WORD_REGEX = /\W/
+        DIGITS_REGEX = /\d/
+        REGEX_PATTERNS_TO_IGNORE = [NON_WORD_REGEX, DIGITS_REGEX]
 
         attr_accessor :word_frequency, :piece_markdown, :piece_title, :total_word_count
 
@@ -41,13 +43,16 @@ module Everything
             .map{ |line| "    #{line}" }
             .join("\n")
 
+
           "  #{name}:\n" \
           "    Total words: #{total_word_count}\n" \
           "#{word_results}"
         end
 
         def words_to_analyze
-          piece_markdown.split(/\b/).map(&:downcase).reject { |w| w.match(NON_WORD_REGEX) }
+          piece_markdown.split(/\b/).map(&:downcase).reject do |w|
+            REGEX_PATTERNS_TO_IGNORE.any?{|pattern| w.match(pattern )}
+          end
         end
       end
     end
