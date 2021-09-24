@@ -1,11 +1,13 @@
 module Everything
   class Analysis
     module Analytics
-      class WhitespacePercentage
-        attr_accessor :character_type_counts, :piece_markdown, :piece_title
+      class CharacterFrequency
+        CHARACTERS_TO_IGNORE = [' ', "\n"]
+
+        attr_accessor :character_frequency, :piece_markdown, :piece_title
 
         def name
-          'Whitespace Percentage'
+          'Character Frequency'
         end
 
         def initialize(piece_title:, piece_markdown:)
@@ -14,33 +16,29 @@ module Everything
         end
 
         def run
-          self.character_type_counts = {
-            whitespace: 0.0,
-            non_whitespace: 0.0,
-            total: 0.0,
-          }
-
-          piece_markdown.each_char do |char|
-            character_type_counts[:total] += 1
-
-            if char.match(/\s/)
-              character_type_counts[:whitespace] += 1
-            else
-              character_type_counts[:non_whitespace] += 1
-            end
+          self.character_frequency = {}
+          characters_to_analyze.each do |char|
+            character_frequency[char] ||= 0
+            character_frequency[char] += 1
           end
 
           self
         end
 
         def to_s
-          total = character_type_counts[:total]
-          whitespace = character_type_counts[:whitespace]
-          non_whitespace = character_type_counts[:non_whitespace]
-          percentage_whitespace = ((whitespace / total) * 100).ceil(1)
-          percentage_non_whitespace = ((non_whitespace / total) * 100).ceil(1)
+          charcater_results = character_frequency
+            .sort_by { |_,times_used| times_used }
+            .reverse
+            .map do |char, times_used|
+              "`#{char}` was used #{times_used} times"
+            end
+            .map{ |line| "    #{line}" }
+            .join("\n")
+          "  #{name}:\n#{charcater_results}"
+        end
 
-          "  #{name}\n    % Whitespace: #{percentage_whitespace}\n    % Non-Whitespace: #{percentage_non_whitespace}"
+        def characters_to_analyze
+          piece_markdown.each_char.reject { |char| CHARACTERS_TO_IGNORE.include?(char) }
         end
       end
     end
