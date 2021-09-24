@@ -39,8 +39,8 @@ module Everything
             .map{ |line| "    #{line}" }
             .join("\n")
 
-          "  #{name}:\n" +
-          "    Total characters: #{total_character_count}\n" +
+          "  #{name}:\n" \
+          "    Total characters: #{total_character_count}\n" \
           "#{charcater_results}"
         end
 
