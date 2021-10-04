@@ -89,10 +89,10 @@ module Everything
 
     def analysis_to_perform
       [
+        Everything::Analysis::Analytics::SentenceCounter,
+        Everything::Analysis::Analytics::WordFrequency,
         Everything::Analysis::Analytics::CharacterFrequency,
         Everything::Analysis::Analytics::WhitespacePercentage,
-        Everything::Analysis::Analytics::WordFrequency,
-        Everything::Analysis::Analytics::SentenceCounter,
       ]
       # What other analytics?
       # Percentage of characters that is punctuation
