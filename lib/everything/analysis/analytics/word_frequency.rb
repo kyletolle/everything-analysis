@@ -38,19 +38,18 @@ module Everything
           max_word_length = word_frequency.map{|word, _| word.length}.max
           max_times_used_length = word_frequency.map { |_, times_used| times_used.to_i.to_s.length }.max
 
-          word_results = word_frequency
+          table = Everything::Analysis::Table.new(spaces_to_pad_at_beginning_of_each_line: 4)
+          table.add_columns(:word, :uses, :percentage)
+          table.add_row({ word: 'Total Words', uses: total_word_count.to_s, percentage: '100' })
+
+          word_frequency
             .map do |word, times_used|
               percentage_of_total = ((times_used.to_f / total_word_count) * 100).ceil(1)
-              word_text = word.ljust(max_word_length)
-              times_used_text = times_used.to_i.to_s.ljust(max_times_used_length)
-              "    #{word_text} | #{times_used_text} uses (#{percentage_of_total}%)"
+              table.add_row({ word: word, uses: times_used.to_i.to_s, percentage: percentage_of_total.to_s })
             end
-            .join("\n")
 
-
-          "  #{name}:\n" \
-          "    Total words: #{total_word_count}\n" \
-          "#{word_results}"
+          "  #{name}\n" \
+          "#{table}"
         end
       end
     end
