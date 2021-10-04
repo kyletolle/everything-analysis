@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'sentiment_lib'
 require_relative './sentence_counter'
 
