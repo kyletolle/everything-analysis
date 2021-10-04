@@ -36,17 +36,17 @@ module Everything
           table = Everything::Analysis::Table.new
           table.add_columns(:character, :uses, :percentage)
 
+          table.add_row({ character: 'Total Characters', uses: total_character_count.to_s, percentage: '100' })
           character_results = character_frequency
             .sort_by { |_,times_used| times_used }
             .reverse
             .each do |char, times_used|
               percentage_of_total = ((times_used / total_character_count) * 100).ceil(1)
               times_used_text = times_used.to_i.to_s.ljust(max_times_used_length)
-              table.add_row({ character: char, uses: times_used.to_i.to_s, percentage: percentage_of_total.to_s})
+              table.add_row({ character: char, uses: times_used.to_i.to_s, percentage: percentage_of_total.to_s })
             end
 
           "  #{name}:\n" \
-          "    Total characters: #{total_character_count}\n" \
           "#{table}"
         end
 
