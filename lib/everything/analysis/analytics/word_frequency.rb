@@ -33,14 +33,18 @@ module Everything
         end
 
         def to_s
+          max_word_length = word_frequency.map{|word, _| word.length}.max
+          max_times_used_length = word_frequency.map { |_, times_used| times_used.to_i.to_s.length }.max
+
           word_results = word_frequency
             .sort_by { |_,times_used| times_used }
             .reverse
             .map do |word, times_used|
               percentage_of_total = ((times_used / total_word_count) * 100).ceil(1)
-              "#{word} - #{times_used.to_i} uses (#{percentage_of_total}%)"
+              word_text = word.ljust(max_word_length)
+              times_used_text = times_used.to_i.to_s.ljust(max_times_used_length)
+              "    #{word_text} | #{times_used_text} uses (#{percentage_of_total}%)"
             end
-            .map{ |line| "    #{line}" }
             .join("\n")
 
 

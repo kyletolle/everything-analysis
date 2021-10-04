@@ -42,10 +42,11 @@ module Everything
           percentage_whitespace = ((whitespace / total) * 100).ceil(1)
           percentage_non_whitespace = ((non_whitespace / total) * 100).ceil(1)
 
+          max_label_length = 15
           "  #{name}\n" \
-          "    Total: #{total.to_i}\n" \
-          "    Whitespace: #{whitespace.to_i} (#{percentage_whitespace}%)\n" \
-          "    Non-Whitespace: #{non_whitespace.to_i} (#{percentage_non_whitespace}%)"
+          "    #{'Total:'.ljust(max_label_length)} #{total.to_i}\n" \
+          "    #{'Whitespace:'.ljust(max_label_length)} #{whitespace.to_i} (#{percentage_whitespace}%)\n" \
+          "    #{'Non-Whitespace:'.ljust(max_label_length)} #{non_whitespace.to_i} (#{percentage_non_whitespace}%)"
         end
       end
     end

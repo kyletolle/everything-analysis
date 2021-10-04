@@ -42,10 +42,11 @@ module Everything
           percentage_punctuation = ((punctuation / total) * 100).ceil(1)
           percentage_non_punctuation = ((non_punctuation / total) * 100).ceil(1)
 
+          max_label_length = 16
           "  #{name}\n" \
-          "    Total: #{total.to_i}\n" \
-          "    Punctuation: #{punctuation.to_i} (#{percentage_punctuation}%)\n" \
-          "    Non-Punctuation: #{non_punctuation.to_i} (#{percentage_non_punctuation}%)"
+          "    #{'Total:'.ljust(max_label_length)} #{total.to_i}\n" \
+          "    #{'Punctuation:'.ljust(max_label_length)} #{punctuation.to_i} (#{percentage_punctuation}%)\n" \
+          "    #{'Non-Punctuation:'.ljust(max_label_length)} #{non_punctuation.to_i} (#{percentage_non_punctuation}%)"
         end
       end
     end
