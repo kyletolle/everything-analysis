@@ -19,16 +19,18 @@ module Everything
         end
 
         def sentences
-          # Following steps at
-          # https://github.com/louismullie/stanford-core-nlp#using-the-latest-version-of-the-stanford-corenlp
-          # helped get me get the stanford corenlp gem working!
-          pipeline = Everything::Analysis::StanfordCorenlpPipeline.pipeline
-          text = StanfordCoreNLP::Annotation.new(piece_markdown)
-          pipeline
-            .tap{|o| puts "Starting annotation for #{piece_title}..." }
-            .annotate(text)
-            .tap{|o| puts "Finished annotation for #{piece_title}"}
-          text.get(:sentences)
+          @sentences ||= begin
+            # Following steps at
+            # https://github.com/louismullie/stanford-core-nlp#using-the-latest-version-of-the-stanford-corenlp
+            # helped get me get the stanford corenlp gem working!
+            pipeline = Everything::Analysis::StanfordCorenlpPipeline.pipeline
+            text = StanfordCoreNLP::Annotation.new(piece_markdown)
+            pipeline
+              .tap{|o| puts "Starting annotation for #{piece_title}..." }
+              .annotate(text)
+              .tap{|o| puts "Finished annotation for #{piece_title}"}
+            text.get(:sentences)
+          end
         end
 
         def run
