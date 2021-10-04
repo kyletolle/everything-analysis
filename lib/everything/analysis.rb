@@ -97,10 +97,7 @@ module Everything
         Everything::Analysis::Analytics::PunctuationPercentage,
       ]
       # What other analytics?
-      # Percentage of characters that is punctuation
-      # Number of paragraphs
       # Sentiment analysis. Check out https://stackoverflow.com/questions/25475581/ruby-split-text-into-sentences for a NLP that could be cool to use!
-      # Show character frequency as % instead of just raw total
       # Compare character frequency % for myself to the global %s to see what
       # characters I use more than other writers. Idea from Zach
       # Most common words per chapter - also from Zach
