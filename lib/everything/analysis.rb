@@ -89,6 +89,7 @@ module Everything
 
     def analysis_to_perform
       [
+        Everything::Analysis::Analytics::ParagraphCounter,
         Everything::Analysis::Analytics::SentenceCounter,
         Everything::Analysis::Analytics::WordFrequency,
         Everything::Analysis::Analytics::CharacterFrequency,
