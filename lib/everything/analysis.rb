@@ -89,12 +89,13 @@ module Everything
 
     def analysis_to_perform
       [
-        Everything::Analysis::Analytics::ParagraphCounter,
-        Everything::Analysis::Analytics::SentenceCounter,
-        Everything::Analysis::Analytics::WordFrequency,
-        Everything::Analysis::Analytics::CharacterFrequency,
-        Everything::Analysis::Analytics::WhitespacePercentage,
-        Everything::Analysis::Analytics::PunctuationPercentage,
+        # Everything::Analysis::Analytics::ParagraphCounter,
+        # Everything::Analysis::Analytics::SentenceCounter,
+        # Everything::Analysis::Analytics::WordFrequency,
+        # Everything::Analysis::Analytics::CharacterFrequency,
+        # Everything::Analysis::Analytics::WhitespacePercentage,
+        # Everything::Analysis::Analytics::PunctuationPercentage,
+        Everything::Analysis::Analytics::SentimentAnalyzer
       ]
       # What other analytics?
       # Sentiment analysis. Check out https://stackoverflow.com/questions/25475581/ruby-split-text-into-sentences for a NLP that could be cool to use!

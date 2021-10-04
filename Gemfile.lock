@@ -3,14 +3,32 @@ GEM
   specs:
     bind-it (0.2.7)
       rjb (~> 1.4.3)
+    diff-lcs (1.4.4)
     dotenv (2.7.6)
     everything-core (0.0.13)
       dotenv (~> 2.1)
       fastenv (= 0.0.3)
     fastenv (0.0.3)
     rjb (1.4.9)
+    rspec (3.10.0)
+      rspec-core (~> 3.10.0)
+      rspec-expectations (~> 3.10.0)
+      rspec-mocks (~> 3.10.0)
+    rspec-core (3.10.1)
+      rspec-support (~> 3.10.0)
+    rspec-expectations (3.10.1)
+      diff-lcs (>= 1.2.0, < 2.0)
+      rspec-support (~> 3.10.0)
+    rspec-mocks (3.10.2)
+      diff-lcs (>= 1.2.0, < 2.0)
+      rspec-support (~> 3.10.0)
+    rspec-support (3.10.2)
+    sentiment_lib (0.2.1)
+      rspec (>= 2)
+      stemmer (>= 1)
     stanford-core-nlp (0.5.3)
       bind-it (~> 0.2.7)
+    stemmer (1.0.1)
     tactful_tokenizer (0.0.5)
     thor (1.1.0)
 
@@ -21,6 +39,7 @@ DEPENDENCIES
   dotenv
   everything-core
   fastenv
+  sentiment_lib
   stanford-core-nlp
   tactful_tokenizer
   thor
