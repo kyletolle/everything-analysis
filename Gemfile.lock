@@ -1,3 +1,9 @@
+GIT
+  remote: https://github.com/werthen/words_counted
+  revision: 735357e4d530c99d5c4c366d0c246ebffffd80de
+  specs:
+    words_counted (1.0.2)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -43,6 +49,7 @@ DEPENDENCIES
   stanford-core-nlp
   tactful_tokenizer
   thor
+  words_counted!
 
 BUNDLED WITH
    2.2.27
