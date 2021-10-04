@@ -5,6 +5,7 @@ require 'pathname'
 require 'bundler/setup'
 Bundler.require(:default)
 Dotenv.load
+require "tactful_tokenizer"
 
 module Everything
   class Analysis
@@ -95,8 +96,7 @@ module Everything
       ]
       # What other analytics?
       # Percentage of characters that is punctuation
-      # Number of words
-      # Number of sentences
+      # Number of sentences. Check out https://stackoverflow.com/questions/25475581/ruby-split-text-into-sentences for a NLP that could be cool to use!
       # Number of paragraphs
       # Show character frequency as % instead of just raw total
       # Compare character frequency % for myself to the global %s to see what
@@ -104,6 +104,15 @@ module Everything
       # Most common words per chapter - also from Zach
       # He mentions the plot he made from
       # https://github.com/ZWMiller/PythonProjects/blob/master/wordCounter/img/toaesWordCountPlot.png
+    end
+
+    ###################################################
+
+    def tokenize
+      model = TactfulTokenizer::Model.new
+      first_piece_text = pieces_to_analyze.first.raw_markdown
+      tokens = model.tokenize_text(first_piece_text)
+      puts "Number of sentences: #{tokens.count}"
     end
   end
 end

@@ -6,6 +6,7 @@ GEM
       dotenv (~> 2.1)
       fastenv (= 0.0.3)
     fastenv (0.0.3)
+    tactful_tokenizer (0.0.5)
     thor (1.1.0)
 
 PLATFORMS
@@ -15,6 +16,7 @@ DEPENDENCIES
   dotenv
   everything-core
   fastenv
+  tactful_tokenizer
   thor
 
 BUNDLED WITH
