@@ -33,14 +33,14 @@ module Everything
         headers = self.columns.map do |column|
           column[:name].to_s.pluralize.capitalize.ljust(column[:max_length])
         end
-        justified_text = self.rows.map do |row|
-          row.map.with_index do |row_value, index|
+        justified_texts = self.rows.map do |row|
+          '| ' + row.map.with_index do |row_value, index|
             column = columns[index]
             row_value.ljust(column[:max_length])
-          end
+          end.join(' | ') + ' |'
         end
         "| #{headers.join(' | ')} |\n" \
-        "| #{justified_text.join(' | ')} |\n"
+        "#{justified_texts.join("\n")}"
       end
     end
   end
