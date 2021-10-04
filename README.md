@@ -22,7 +22,9 @@ You can create a `.env` file with these values, if you want. Dotenv will automat
 
 Follow steps at
 https://github.com/louismullie/stanford-core-nlp#using-the-latest-version-of-the-stanford-corenlp
-to install the additional Stanford Core NLP files into the stanford-core-nlp gem's folder.
+to install the additional Stanford Core NLP files into the stanford-core-nlp
+gem's folder. The answer at https://stackoverflow.com/a/41338411/249218 is also
+a good introduction to using them gem!
 
 ## Usage
 
