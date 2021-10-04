@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
-require "tactful_tokenizer"
+require 'tactful_tokenizer'
+require 'stanford-core-nlp'
 
 module Everything
   class Analysis
@@ -18,9 +19,24 @@ module Everything
         end
 
         def run
-          model = TactfulTokenizer::Model.new
-          tokens = model.tokenize_text(piece_markdown)
-          self.sentences_count = tokens.count
+          # Following steps at
+          # https://github.com/louismullie/stanford-core-nlp#using-the-latest-version-of-the-stanford-corenlp
+          # helped get me get the stanford corenlp gem working!
+          StanfordCoreNLP.use :english
+          StanfordCoreNLP.model_files = {}
+          StanfordCoreNLP.default_jars = [
+            'joda-time.jar',
+            'xom.jar',
+            'stanford-corenlp-3.5.0.jar',
+            'stanford-corenlp-3.5.0-models.jar',
+            'jollyday.jar',
+            'bridge.jar'
+          ]
+
+          pipeline = StanfordCoreNLP.load(:tokenize, :ssplit)
+          text = StanfordCoreNLP::Annotation.new(piece_markdown)
+          pipeline.annotate(text)
+          self.sentences_count = text.get(:sentences).size
 
           self
         end

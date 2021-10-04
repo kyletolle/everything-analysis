@@ -1,11 +1,16 @@
 GEM
   remote: https://rubygems.org/
   specs:
+    bind-it (0.2.7)
+      rjb (~> 1.4.3)
     dotenv (2.7.6)
     everything-core (0.0.13)
       dotenv (~> 2.1)
       fastenv (= 0.0.3)
     fastenv (0.0.3)
+    rjb (1.4.9)
+    stanford-core-nlp (0.5.3)
+      bind-it (~> 0.2.7)
     tactful_tokenizer (0.0.5)
     thor (1.1.0)
 
@@ -16,6 +21,7 @@ DEPENDENCIES
   dotenv
   everything-core
   fastenv
+  stanford-core-nlp
   tactful_tokenizer
   thor
 

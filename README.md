@@ -20,6 +20,10 @@ Must define these environment variables:
 
 You can create a `.env` file with these values, if you want. Dotenv will automatically load the `.env` file.
 
+Follow steps at
+https://github.com/louismullie/stanford-core-nlp#using-the-latest-version-of-the-stanford-corenlp
+to install the additional Stanford Core NLP files into the stanford-core-nlp gem's folder.
+
 ## Usage
 
 ```
