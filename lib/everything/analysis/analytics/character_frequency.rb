@@ -33,7 +33,8 @@ module Everything
         def to_s
           max_times_used_length = character_frequency.map{|_, times_used| times_used.to_i.to_s.length }.max
 
-          table = Everything::Analysis::Table.new
+
+          table = Everything::Analysis::Table.new(spaces_to_pad_at_beginning_of_each_line: 4)
           table.add_columns(:character, :uses, :percentage)
 
           table.add_row({ character: 'Total Characters', uses: total_character_count.to_s, percentage: '100' })
@@ -46,7 +47,7 @@ module Everything
               table.add_row({ character: char, uses: times_used.to_i.to_s, percentage: percentage_of_total.to_s })
             end
 
-          "  #{name}:\n" \
+          "  #{name}\n" \
           "#{table}"
         end
 

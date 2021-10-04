@@ -3,9 +3,10 @@ require 'active_support/core_ext/string/inflections'
 module Everything
   class Analysis
     class Table
-      attr_accessor :columns, :rows
+      attr_accessor :columns, :rows, :spaces_to_pad_at_beginning_of_each_line
 
-      def initialize
+      def initialize(spaces_to_pad_at_beginning_of_each_line:)
+        self.spaces_to_pad_at_beginning_of_each_line = spaces_to_pad_at_beginning_of_each_line
         self.columns = []
         self.rows = []
       end
@@ -34,16 +35,18 @@ module Everything
           column[:name].to_s.pluralize.capitalize.ljust(column[:max_length])
         end
 
+        line_padding = ' ' * spaces_to_pad_at_beginning_of_each_line
+
         justified_texts = self.rows.map do |row|
-          '| ' + row.map.with_index do |row_value, index|
+          "#{line_padding}| " + row.map.with_index do |row_value, index|
             column = columns[index]
             row_value.ljust(column[:max_length])
           end.join(' | ') + ' |'
         end
 
         header_text = "| #{headers.join(' | ')} |\n"
-        "#{header_text}" \
-        "|#{'-' * (header_text.length - 3)}|\n" \
+        "#{line_padding}#{header_text}" \
+        "#{line_padding}|#{'-' * (header_text.length - 3)}|\n" \
         "#{justified_texts.join("\n")}"
       end
     end
