@@ -8,11 +8,6 @@ module Everything
         analysis.run_and_print
       end
 
-      desc 'tokenize', 'tokenize a piece with Tactful_Tokenizer'
-      def tokenize
-        analysis.tokenize
-      end
-
       private
 
       def analysis
