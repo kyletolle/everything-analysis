@@ -108,3 +108,4 @@ module Everything
 end
 
 require_relative './analysis/analytics'
+require_relative './analysis/table'

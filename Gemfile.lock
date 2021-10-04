@@ -7,14 +7,24 @@ GIT
 GEM
   remote: https://rubygems.org/
   specs:
+    activesupport (6.1.4.1)
+      concurrent-ruby (~> 1.0, >= 1.0.2)
+      i18n (>= 1.6, < 2)
+      minitest (>= 5.1)
+      tzinfo (~> 2.0)
+      zeitwerk (~> 2.3)
     bind-it (0.2.7)
       rjb (~> 1.4.3)
+    concurrent-ruby (1.1.9)
     diff-lcs (1.4.4)
     dotenv (2.7.6)
     everything-core (0.0.13)
       dotenv (~> 2.1)
       fastenv (= 0.0.3)
     fastenv (0.0.3)
+    i18n (1.8.10)
+      concurrent-ruby (~> 1.0)
+    minitest (5.14.4)
     rjb (1.4.9)
     rspec (3.10.0)
       rspec-core (~> 3.10.0)
@@ -37,11 +47,15 @@ GEM
     stemmer (1.0.1)
     tactful_tokenizer (0.0.5)
     thor (1.1.0)
+    tzinfo (2.0.4)
+      concurrent-ruby (~> 1.0)
+    zeitwerk (2.4.2)
 
 PLATFORMS
   x86_64-darwin-20
 
 DEPENDENCIES
+  activesupport
   dotenv
   everything-core
   fastenv
