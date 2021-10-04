@@ -7,7 +7,7 @@ module Everything
         attr_accessor :piece_markdown, :piece_title, :punctuation_type_counts
 
         def name
-          'PunctuationPercentage'
+          'Punctuation Percentage'
         end
 
         def initialize(piece_title:, piece_markdown:)
