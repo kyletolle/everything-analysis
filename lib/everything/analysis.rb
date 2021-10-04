@@ -93,6 +93,7 @@ module Everything
         Everything::Analysis::Analytics::WordFrequency,
         Everything::Analysis::Analytics::CharacterFrequency,
         Everything::Analysis::Analytics::WhitespacePercentage,
+        Everything::Analysis::Analytics::PunctuationPercentage,
       ]
       # What other analytics?
       # Percentage of characters that is punctuation
