@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require_relative './sentence_counter'
+
 module Everything
   class Analysis
     module Analytics
@@ -54,9 +56,26 @@ module Everything
         end
 
         def words_to_analyze
-          piece_markdown.split(/\b/).map(&:downcase).reject do |w|
-            REGEX_PATTERNS_TO_IGNORE.any?{|pattern| w.match(pattern )}
+          @words ||= begin
+            words = []
+
+            Everything::Analysis::Analytics::SentenceCounter
+              .new(piece_title: piece_title, piece_markdown: piece_markdown)
+              .sentences
+              .each do |sentence|
+                sentence.get(:tokens).each do |token|
+                  words << token.get(:original_text).to_s.downcase
+                end
+              end
+
+            # words
+            #   .reject do |word|
+            #     REGEX_PATTERNS_TO_IGNORE.any? { |pattern| word.match pattern }
+            #   end
+            words
           end
+
+          @words
         end
       end
     end
