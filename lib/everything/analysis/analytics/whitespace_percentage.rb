@@ -36,17 +36,21 @@ module Everything
         end
 
         def to_s
+          table = Everything::Analysis::Table.new(spaces_to_pad_at_beginning_of_each_line: 4)
+          table.add_columns(:type, :use, :percentage)
+
           total = character_type_counts[:total]
           whitespace = character_type_counts[:whitespace]
           non_whitespace = character_type_counts[:non_whitespace]
           percentage_whitespace = ((whitespace / total) * 100).ceil(1)
           percentage_non_whitespace = ((non_whitespace / total) * 100).ceil(1)
 
-          max_label_length = 15
+          table.add_row({ type: 'Total', use: total.to_i.to_s, percentage: '100' })
+          table.add_row({ type: 'Whitespace', use: whitespace.to_i.to_s, percentage: percentage_whitespace.to_s })
+          table.add_row({ type: 'Non-Whitespace', use: non_whitespace.to_i.to_s, percentage: percentage_non_whitespace.to_s })
+
           "  #{name}\n" \
-          "    #{'Total:'.ljust(max_label_length)} #{total.to_i}\n" \
-          "    #{'Whitespace:'.ljust(max_label_length)} #{whitespace.to_i} (#{percentage_whitespace}%)\n" \
-          "    #{'Non-Whitespace:'.ljust(max_label_length)} #{non_whitespace.to_i} (#{percentage_non_whitespace}%)"
+          "#{table}"
         end
       end
     end

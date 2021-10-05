@@ -36,17 +36,21 @@ module Everything
         end
 
         def to_s
+          table = Everything::Analysis::Table.new(spaces_to_pad_at_beginning_of_each_line: 4)
+          table.add_columns(:type, :use, :percentage)
+
           total = punctuation_type_counts[:total]
           punctuation = punctuation_type_counts[:punctuation]
           non_punctuation = punctuation_type_counts[:non_punctuation]
           percentage_punctuation = ((punctuation / total) * 100).ceil(1)
           percentage_non_punctuation = ((non_punctuation / total) * 100).ceil(1)
 
-          max_label_length = 16
+          table.add_row({ type: 'Total', use: total.to_i.to_s, percentage: '100' })
+          table.add_row({ type: 'Puncutation', use: punctuation.to_i.to_s, percentage: percentage_punctuation.to_s })
+          table.add_row({ type: 'Non-Punctuation', use: non_punctuation.to_i.to_s, percentage: percentage_non_punctuation.to_s })
+
           "  #{name}\n" \
-          "    #{'Total:'.ljust(max_label_length)} #{total.to_i}\n" \
-          "    #{'Punctuation:'.ljust(max_label_length)} #{punctuation.to_i} (#{percentage_punctuation}%)\n" \
-          "    #{'Non-Punctuation:'.ljust(max_label_length)} #{non_punctuation.to_i} (#{percentage_non_punctuation}%)"
+          "#{table}"
         end
       end
     end

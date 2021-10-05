@@ -66,23 +66,24 @@ module Everything
         def to_s
           total_sentences = sentences.size
 
-          sentiments_string = sentiments
-            .map do |sentiment_rating, count|
-              percent = ((count.to_f / total_sentences)*100).ceil(2)
-              "      #{count} sentences had the sentiment rating of #{sentiment_rating} (#{percent}%) "
-            end
-            .join("\n")
+          rating_table = Everything::Analysis::Table.new(spaces_to_pad_at_beginning_of_each_line: 6)
+          rating_table.add_columns(:rating, :count, :percentage)
+          sentiments.each do |sentiment_rating, count|
+            percent = ((count.to_f / total_sentences)*100).ceil(2)
+            rating_table.add_row({ rating: sentiment_rating.to_s, count: count.to_s, percentage: percent.to_s})
+          end
 
-          category_counts = sentiment_categories
-            .map do |category, count|
-              percent = ((count.to_f / total_sentences)*100).ceil(2)
-              "      #{count} sentences were #{category} (#{percent}%)"
-            end
-            .join("\n")
+          category_table = Everything::Analysis::Table.new(spaces_to_pad_at_beginning_of_each_line: 6)
+          category_table.add_columns(:category, :count, :percentage)
+
+          sentiment_categories.each do |category, count|
+            percent = ((count.to_f / total_sentences)*100).ceil(2)
+            category_table.add_row({ category: category.to_s, count: count.to_s, percentage: percent.to_s})
+          end
 
           "  #{name}\n" \
-          "    Sentiments: \n#{sentiments_string}\n\n" \
-          "    Sentiment Categories: \n#{category_counts}"
+          "    Sentiment Ratings: \n#{rating_table}\n\n" \
+          "    Sentiment Categories: \n#{category_table}"
         end
       end
     end
