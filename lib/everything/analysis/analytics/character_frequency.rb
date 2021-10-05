@@ -33,7 +33,6 @@ module Everything
         def to_s
           max_times_used_length = character_frequency.map{|_, times_used| times_used.to_i.to_s.length }.max
 
-
           table = Everything::Analysis::Table.new(spaces_to_pad_at_beginning_of_each_line: 4)
           table.add_columns(:character, :uses, :percentage)
 
