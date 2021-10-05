@@ -45,9 +45,13 @@ module Everything
         end
 
         header_text = "| #{headers.join(' | ')} |\n"
+        spacer_line = "#{line_padding}|#{'-' * (header_text.length - 3)}|\n"
+
+        "#{spacer_line}" \
         "#{line_padding}#{header_text}" \
-        "#{line_padding}|#{'-' * (header_text.length - 3)}|\n" \
-        "#{justified_texts.join("\n")}"
+        "#{spacer_line}" \
+        "#{justified_texts.join("\n")}\n" \
+        "#{spacer_line}\n"
       end
     end
   end
