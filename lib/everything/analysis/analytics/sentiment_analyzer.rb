@@ -82,8 +82,10 @@ module Everything
           end
 
           "  #{name}\n" \
-          "    Sentiment Ratings: \n#{rating_table}\n\n" \
-          "    Sentiment Categories: \n#{category_table}"
+          "    Sentiment Ratings: \n" \
+          "#{rating_table}" \
+          "    Sentiment Categories: \n" \
+          "#{category_table}"
         end
       end
     end
