@@ -36,7 +36,7 @@ module Everything
         def to_s
           table = Everything::Analysis::Table.new(spaces_to_pad_at_beginning_of_each_line: 4)
           table.add_columns(:total_words)
-          table.add_row({ total_words: total_word_count.to_s })
+          table.add_row({ total_words: total_word_count })
 
           "  #{name}\n" \
           "#{table}"

@@ -45,9 +45,9 @@ module Everything
           percentage_punctuation = ((punctuation / total) * 100).ceil(1)
           percentage_non_punctuation = ((non_punctuation / total) * 100).ceil(1)
 
-          table.add_row({ type: 'Total', use: total.to_i.to_s, percentage: '100' })
-          table.add_row({ type: 'Puncutation', use: punctuation.to_i.to_s, percentage: percentage_punctuation.to_s })
-          table.add_row({ type: 'Non-Punctuation', use: non_punctuation.to_i.to_s, percentage: percentage_non_punctuation.to_s })
+          table.add_row({ type: 'Total', use: total.to_i, percentage: '100' })
+          table.add_row({ type: 'Puncutation', use: punctuation.to_i, percentage: percentage_punctuation })
+          table.add_row({ type: 'Non-Punctuation', use: non_punctuation.to_i, percentage: percentage_non_punctuation })
 
           "  #{name}\n" \
           "#{table}"

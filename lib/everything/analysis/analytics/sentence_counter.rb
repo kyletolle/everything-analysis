@@ -44,7 +44,7 @@ module Everything
         def to_s
           table = Everything::Analysis::Table.new(spaces_to_pad_at_beginning_of_each_line: 4)
           table.add_columns(:sentence)
-          table.add_row({ sentence: sentences_count.to_i.to_s })
+          table.add_row({ sentence: sentences_count.to_i })
 
           "  #{name}\n" \
           "#{table}"

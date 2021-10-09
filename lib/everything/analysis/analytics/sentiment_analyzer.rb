@@ -70,7 +70,7 @@ module Everything
           rating_table.add_columns(:rating, :count, :percentage)
           sentiments.each do |sentiment_rating, count|
             percent = ((count.to_f / total_sentences)*100).ceil(2)
-            rating_table.add_row({ rating: sentiment_rating.to_s, count: count.to_s, percentage: percent.to_s})
+            rating_table.add_row({ rating: sentiment_rating, count: count, percentage: percent })
           end
 
           category_table = Everything::Analysis::Table.new(spaces_to_pad_at_beginning_of_each_line: 6)
@@ -78,7 +78,7 @@ module Everything
 
           sentiment_categories.each do |category, count|
             percent = ((count.to_f / total_sentences)*100).ceil(2)
-            category_table.add_row({ category: category.to_s, count: count.to_s, percentage: percent.to_s})
+            category_table.add_row({ category: category, count: count, percentage: percent })
           end
 
           "  #{name}\n" \

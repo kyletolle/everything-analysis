@@ -25,7 +25,7 @@ module Everything
         def to_s
           table = Everything::Analysis::Table.new(spaces_to_pad_at_beginning_of_each_line: 4)
           table.add_columns(:paragraph)
-          table.add_row({ paragraph: paragraphs_count.to_i.to_s })
+          table.add_row({ paragraph: paragraphs_count.to_i })
 
           "  #{name}\n" \
           "#{table}"

@@ -35,10 +35,10 @@ module Everything
       def add_row(row_data)
         self.rows << row_data.map do |column_name, row_value|
           column = columns.find{|c| c[:name] === column_name}
-          row_length = row_value.length
+          row_length = row_value.to_s.length
           column[:max_length] = row_length if row_length > column[:max_length]
 
-          row_value
+          row_value.to_s
         end
       end
 

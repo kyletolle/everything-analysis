@@ -45,9 +45,9 @@ module Everything
           percentage_whitespace = ((whitespace / total) * 100).ceil(1)
           percentage_non_whitespace = ((non_whitespace / total) * 100).ceil(1)
 
-          table.add_row({ type: 'Total', use: total.to_i.to_s, percentage: '100' })
-          table.add_row({ type: 'Whitespace', use: whitespace.to_i.to_s, percentage: percentage_whitespace.to_s })
-          table.add_row({ type: 'Non-Whitespace', use: non_whitespace.to_i.to_s, percentage: percentage_non_whitespace.to_s })
+          table.add_row({ type: 'Total', use: total.to_i, percentage: '100' })
+          table.add_row({ type: 'Whitespace', use: whitespace.to_i, percentage: percentage_whitespace })
+          table.add_row({ type: 'Non-Whitespace', use: non_whitespace.to_i, percentage: percentage_non_whitespace })
 
           "  #{name}\n" \
           "#{table}"

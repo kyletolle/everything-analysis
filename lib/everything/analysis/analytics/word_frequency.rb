@@ -40,12 +40,12 @@ module Everything
 
           table = Everything::Analysis::Table.new(spaces_to_pad_at_beginning_of_each_line: 4)
           table.add_columns(:word, :uses, :percentage)
-          table.add_row({ word: 'Total Unique Words', uses: total_unique_words.to_s, percentage: '100' })
+          table.add_row({ word: 'Total Unique Words', uses: total_unique_words, percentage: '100' })
 
           word_frequency
             .map do |word, times_used|
               percentage_of_total = ((times_used.to_f / total_unique_words) * 100).ceil(1)
-              table.add_row({ word: word, uses: times_used.to_i.to_s, percentage: percentage_of_total.to_s })
+              table.add_row({ word: word, uses: times_used.to_i, percentage: percentage_of_total })
             end
 
           "  #{name}\n" \
