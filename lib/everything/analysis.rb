@@ -96,6 +96,7 @@ module Everything
         Everything::Analysis::Analytics::WhitespacePercentage,
         Everything::Analysis::Analytics::PunctuationPercentage,
         Everything::Analysis::Analytics::SentimentAnalyzer
+        Everything::Analysis::Analytics::WordCounter,
       ]
       # What other analytics?
       # Calculate Flesch Reading Ease or Flesch-Kincaid Grade Levels for each chapter and the book as a whole?
