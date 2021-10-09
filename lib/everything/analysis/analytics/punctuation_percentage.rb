@@ -3,25 +3,24 @@
 module Everything
   class Analysis
     module Analytics
-      class PunctuationPercentage
-        attr_accessor :piece_markdown, :piece_title, :punctuation_type_counts
+      class PunctuationPercentage < AnalyticBase
+        attr_accessor :punctuation_type_counts
 
         def name
           'Punctuation Percentage'
         end
 
         def initialize(piece_title:, piece_markdown:)
-          self.piece_markdown = piece_markdown
-          self.piece_title = piece_title
-        end
+          super
 
-        def run
           self.punctuation_type_counts = {
             punctuation: 0.0,
             non_punctuation: 0.0,
             total: 0.0,
           }
+        end
 
+        def run
           piece_markdown.each_char do |char|
             punctuation_type_counts[:total] += 1
 
@@ -32,11 +31,11 @@ module Everything
             end
           end
 
-          self
+          super
         end
 
-        def to_s
-          table = Everything::Analysis::Table.new(spaces_to_pad_at_beginning_of_each_line: 4)
+        def create_table
+          self.table = Everything::Analysis::Table.new(spaces_to_pad_at_beginning_of_each_line: 4)
           table.add_columns(:type, :use, :percentage)
 
           total = punctuation_type_counts[:total]
@@ -48,9 +47,6 @@ module Everything
           table.add_row({ type: 'Total', use: total.to_i, percentage: '100' })
           table.add_row({ type: 'Puncutation', use: punctuation.to_i, percentage: percentage_punctuation })
           table.add_row({ type: 'Non-Punctuation', use: non_punctuation.to_i, percentage: percentage_non_punctuation })
-
-          "  #{name}\n" \
-          "#{table}"
         end
       end
     end

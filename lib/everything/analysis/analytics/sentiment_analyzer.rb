@@ -6,16 +6,11 @@ require_relative './sentence_counter'
 module Everything
   class Analysis
     module Analytics
-      class SentimentAnalyzer
-        attr_accessor :piece_markdown, :piece_title, :sentiments, :sentiment_categories
+      class SentimentAnalyzer < AnalyticBase
+        attr_accessor :sentiments, :sentiment_categories
 
         def name
           'Sentiment Analyzer'
-        end
-
-        def initialize(piece_title:, piece_markdown:)
-          self.piece_markdown = piece_markdown
-          self.piece_title = piece_title
         end
 
         def sentences
@@ -60,7 +55,7 @@ module Everything
             end
           end
 
-          self
+          super
         end
 
         def to_s
