@@ -8,6 +8,7 @@ module Everything
 end
 
 require_relative './analytics/character_frequency'
+require_relative './analytics/estimated_reading_time'
 require_relative './analytics/paragraph_counter'
 require_relative './analytics/punctuation_percentage'
 require_relative './analytics/sentence_counter'
