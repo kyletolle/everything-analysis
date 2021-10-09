@@ -7,7 +7,7 @@ module Everything
   class Analysis
     module Analytics
       class WordFrequency
-        attr_accessor :word_frequency, :piece_markdown, :piece_title, :total_word_count
+        attr_accessor :word_frequency, :piece_markdown, :piece_title, :total_unique_words
 
         def name
           'Word Frequency'
@@ -16,12 +16,12 @@ module Everything
         def initialize(piece_title:, piece_markdown:)
           self.piece_markdown = piece_markdown
           self.piece_title = piece_title
-          self.total_word_count = 0
+          self.total_unique_words = 0
         end
 
         def run
           self.word_frequency = word_counter.token_frequency
-          self.total_word_count = word_counter.uniq_token_count
+          self.total_unique_words = word_counter.uniq_token_count
 
           self
         end
@@ -40,11 +40,11 @@ module Everything
 
           table = Everything::Analysis::Table.new(spaces_to_pad_at_beginning_of_each_line: 4)
           table.add_columns(:word, :uses, :percentage)
-          table.add_row({ word: 'Total Words', uses: total_word_count.to_s, percentage: '100' })
+          table.add_row({ word: 'Total Unique Words', uses: total_unique_words.to_s, percentage: '100' })
 
           word_frequency
             .map do |word, times_used|
-              percentage_of_total = ((times_used.to_f / total_word_count) * 100).ceil(1)
+              percentage_of_total = ((times_used.to_f / total_unique_words) * 100).ceil(1)
               table.add_row({ word: word, uses: times_used.to_i.to_s, percentage: percentage_of_total.to_s })
             end
 
