@@ -111,6 +111,7 @@ module Everything
       #  - https://github.com/diasks2/ruby-nlp#word-count
       #  - https://github.com/arbox/nlp-with-ruby
       #  - https://github.com/louismullie/treat
+      # Lemmatize all the words and see what number of unique root are used, and their frequency too.
       # Compare character frequency % for myself to the global %s to see what
       # characters I use more than other writers. Idea from Zach
       # Most common words per chapter - also from Zach
