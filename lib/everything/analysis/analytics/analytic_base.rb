@@ -4,15 +4,14 @@ module Everything
   class Analysis
     module Analytics
       class AnalyticBase
-        attr_accessor :piece_markdown, :piece_title, :table
+        attr_accessor :piece, :table
 
         def name
           raise NotImplementedError('Needs to be implemented by the extending class')
         end
 
-        def initialize(piece_title:, piece_markdown:)
-          self.piece_markdown = piece_markdown
-          self.piece_title = piece_title
+        def initialize(piece)
+          self.piece = piece
         end
 
         def run

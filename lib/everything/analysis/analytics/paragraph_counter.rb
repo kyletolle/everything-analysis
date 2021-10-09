@@ -1,10 +1,13 @@
 # frozen_string_literal: true
 
-
 module Everything
   class Analysis
     module Analytics
       class ParagraphCounter < AnalyticBase
+        def self.to_sym
+          Analytics::PARAGRAPH_COUNTER
+        end
+
         attr_accessor :paragraphs_count
 
         def name
@@ -12,7 +15,7 @@ module Everything
         end
 
         def run
-          self.paragraphs_count = piece_markdown.scan("\n\n").count + 1
+          self.paragraphs_count = piece.raw_markdown.scan("\n\n").count + 1
 
           super
         end

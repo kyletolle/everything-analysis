@@ -7,6 +7,10 @@ module Everything
   class Analysis
     module Analytics
       class SentimentAnalyzer < AnalyticBase
+        def self.to_sym
+          Analytics::SENTIMENT_ANALYZER
+        end
+
         attr_accessor :sentiments, :sentiment_categories
 
         def name
@@ -15,7 +19,7 @@ module Everything
 
         def sentences
           Everything::Analysis::Analytics::SentenceCounter
-            .new(piece_title: piece_title, piece_markdown: piece_markdown)
+            .new(piece)
             .sentences
         end
 

@@ -10,7 +10,7 @@ require_relative './piece/analytics'
 module Everything
   class Analysis
     def run_and_print
-      puts analytics_results
+      # puts analytics_results
       puts all_results
     end
 
@@ -28,18 +28,18 @@ module Everything
       end
     end
 
-
     def completed_analytics
       @completed_analytics ||= pieces_data_to_analyze.map do |piece_data|
         piece_title = piece_data[:piece_title]
         piece_markdown = piece_data[:piece_markdown]
         analytics = Analytics::TO_RUN.map do |analysis_klass|
-          analysis_klass.new(piece_title: piece_title, piece_markdown: piece_markdown).run
+          analysis_klass.new(piece).run
         end
         { piece_title: piece_title, analytics: analytics }
       end.flatten
     end
 
+    # TODO: update this
     def pieces_data_to_analyze
       pieces_to_analyze.map do |piece|
         {
@@ -52,37 +52,39 @@ module Everything
     # All Pieces
 
     def all_results
-      piece_title = completed_analytics_for_all[:piece_title]
-      analytics_result = completed_analytics_for_all[:analytics]
+      piece = completed_analytics_for_all
+      analytics_result = piece
+        .analytics
+        .values
         .map(&:to_s)
         .join("\n\n")
 
-      "Analysis for Piece Titled: `#{piece_title}`\n\n" \
+      "Analysis for Piece Titled: `#{piece.title}`\n\n" \
       "#{analytics_result}\n\n"
     end
 
+    # TODO: Update this name...
     def completed_analytics_for_all
-      piece_title = all_pieces_data[:piece_title]
-      piece_markdown = all_pieces_data[:piece_markdown]
+      # TODO: Add each of the analytics to the piece, then run all of them
       analytics = Analytics::TO_RUN.map do |analysis_klass|
-        analysis_klass.new(piece_title: piece_title, piece_markdown: piece_markdown).run
+        all_novel_text_piece.add_analytic(analysis_klass)
       end
-      { piece_title: piece_title, analytics: analytics }
+      all_novel_text_piece.run_analytics
+      all_novel_text_piece
     end
 
-    def all_pieces_data
-      all_markdown = pieces_to_analyze.map(&:raw_markdown).join('')
-      {
-        piece_title: "All Pieces at Once",
-        piece_markdown: all_markdown
-      }
+    def all_novel_text_piece
+      @all_novel_text_piece ||= Everything::Piece.new('/tmp/all_pieces').tap do |piece|
+        all_markdown = pieces_to_analyze.map(&:raw_markdown).join('')
+        piece.raw_markdown = "# All Pieces at Once\n\n#{all_markdown}"
+      end
     end
 
     # Other
 
     def pieces_to_analyze
       @pieces_to_analyze ||= piece_paths.map do |piece_path|
-        Everything::Piece.new(piece_path).tap{ |piece| piece.add_analytic('todo') }
+        Everything::Piece.new(piece_path)
       end
     end
 

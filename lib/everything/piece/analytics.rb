@@ -9,12 +9,19 @@ module Everything
   class Piece
     module Analytics
       # TODO: Add method for add_analytic, so the piece can keep track of the analytics itself.
-
       attr_accessor :analytics
 
-      def add_analytic(analytic)
-        puts 'todo'
-        # analytic[analytic.to_sym] = analytic
+      def add_analytic(analytic_klass)
+        self.analytics ||= {}
+        self.analytics[analytic_klass.to_sym] = analytic_klass.new(self)
+      end
+
+      def get_analytic_by_sym(analytic_sym)
+        self.analytics[analytic_sym]
+      end
+
+      def run_analytics
+        analytics.values.each(&:run)
       end
     end
   end

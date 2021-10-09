@@ -4,13 +4,17 @@ module Everything
   class Analysis
     module Analytics
       class WhitespacePercentage < AnalyticBase
+        def self.to_sym
+          Analytics::WHITESPACE_PERCENTAGE
+        end
+
         attr_accessor :character_type_counts
 
         def name
           'Whitespace Percentage'
         end
 
-        def initialize(piece_title:, piece_markdown:)
+        def initialize(piece)
           super
 
           self.character_type_counts = {
@@ -21,7 +25,7 @@ module Everything
         end
 
         def run
-          piece_markdown.each_char do |char|
+          piece.raw_markdown.each_char do |char|
             character_type_counts[:total] += 1
 
             if char.match(/\s/)

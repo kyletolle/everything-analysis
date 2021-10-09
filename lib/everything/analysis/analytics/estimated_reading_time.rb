@@ -12,6 +12,10 @@ module Everything
   class Analysis
     module Analytics
       class EstimatedReadingTime < AnalyticBase
+        def self.to_sym
+          Analytics::ESTIMATED_READING_TIME
+        end
+
         AVERAGE_WORDS_READ_PER_MINUTE = 200.0
 
         attr_accessor :estimated_reading_time
@@ -21,7 +25,7 @@ module Everything
         end
 
         def run
-          word_frequency = Everything::Analysis::Analytics::WordCounter.new(piece_title: piece_title, piece_markdown: piece_markdown).run
+          word_frequency = Everything::Analysis::Analytics::WordCounter.new(piece).run
 
           self.estimated_reading_time = word_frequency.total_word_count /  AVERAGE_WORDS_READ_PER_MINUTE
 

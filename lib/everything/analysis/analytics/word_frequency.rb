@@ -7,13 +7,17 @@ module Everything
   class Analysis
     module Analytics
       class WordFrequency < AnalyticBase
+        def self.to_sym
+          Analytics::WORD_FREQUENCY
+        end
+
         attr_accessor :word_frequency, :total_unique_words
 
         def name
           'Word Frequency'
         end
 
-        def initialize(piece_title:, piece_markdown:)
+        def initialize(piece)
           super
 
           self.total_unique_words = 0
@@ -31,7 +35,7 @@ module Everything
         end
 
         def text_to_analyze
-          @text_to_analyze ||= piece_markdown.gsub('---', ' ')
+          @text_to_analyze ||= piece.raw_markdown.gsub('---', ' ')
         end
 
         def create_table

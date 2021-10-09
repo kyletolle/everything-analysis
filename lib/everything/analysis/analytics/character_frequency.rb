@@ -4,6 +4,10 @@ module Everything
   class Analysis
     module Analytics
       class CharacterFrequency < AnalyticBase
+        def self.to_sym
+          Analytics::CHARACTER_FREQUENCY
+        end
+
         CHARACTERS_TO_IGNORE = [' ', "\n"]
 
         attr_accessor :character_frequency, :total_character_count
@@ -12,7 +16,7 @@ module Everything
           'Character Frequency'
         end
 
-        def initialize(piece_title:, piece_markdown:)
+        def initialize(piece)
           super
 
           self.total_character_count = 0
@@ -47,7 +51,7 @@ module Everything
         end
 
         def characters_to_analyze
-          piece_markdown.each_char.reject { |char| CHARACTERS_TO_IGNORE.include?(char) }
+          piece.raw_markdown.each_char.reject { |char| CHARACTERS_TO_IGNORE.include?(char) }
         end
       end
     end

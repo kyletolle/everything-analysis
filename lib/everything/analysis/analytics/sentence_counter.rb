@@ -7,6 +7,10 @@ module Everything
   class Analysis
     module Analytics
       class SentenceCounter < AnalyticBase
+        def self.to_sym
+          Analytics::SENTENCE_COUNTER
+        end
+
         attr_accessor :sentences_count
 
         def name
@@ -19,11 +23,11 @@ module Everything
             # https://github.com/louismullie/stanford-core-nlp#using-the-latest-version-of-the-stanford-corenlp
             # helped get me get the stanford corenlp gem working!
             pipeline = Everything::Analysis::StanfordCorenlpPipeline.pipeline
-            text = StanfordCoreNLP::Annotation.new(piece_markdown)
+            text = StanfordCoreNLP::Annotation.new(piece.raw_markdown)
             pipeline
-              .tap{|o| puts "Starting annotation for #{piece_title}..." }
+              .tap{|o| puts "Starting annotation for #{piece.title}..." }
               .annotate(text)
-              .tap{|o| puts "Finished annotation for #{piece_title}"}
+              .tap{|o| puts "Finished annotation for #{piece.title}"}
             text.get(:sentences)
           end
         end

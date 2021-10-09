@@ -14,6 +14,16 @@ require_relative './analytics/word_counter'
 module Everything
   class Analysis
     module Analytics
+      CHARACTER_FREQUENCY = :character_frequency
+      ESTIMATED_READING_TIME = :estimated_reading_time
+      PARAGRAPH_COUNTER = :paragraph_counter
+      PUNCTUATION_PERCENTAGE = :punctuation_percentage
+      SENTENCE_COUNTER = :sentence_counter
+      SENTIMENT_ANALYZER = :sentiment_analyzer
+      WHITESPACE_PERCENTAGE = :whitespace_percentage
+      WORD_COUNTER = :word_counter
+      WORD_FREQUENCY = :word_frequency
+
       # What other analytics?
       # Calculate Flesch Reading Ease or Flesch-Kincaid Grade Levels for each chapter and the book as a whole?
       # Calculate time to read for each chapter and the book as a whole?
