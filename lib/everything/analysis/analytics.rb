@@ -7,6 +7,7 @@ module Everything
   end
 end
 
+require_relative './analytics/analytic_base'
 require_relative './analytics/character_frequency'
 require_relative './analytics/estimated_reading_time'
 require_relative './analytics/paragraph_counter'

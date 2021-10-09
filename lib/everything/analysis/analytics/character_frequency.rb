@@ -3,23 +3,23 @@
 module Everything
   class Analysis
     module Analytics
-      class CharacterFrequency
+      class CharacterFrequency < AnalyticBase
         CHARACTERS_TO_IGNORE = [' ', "\n"]
 
-        attr_accessor :character_frequency, :piece_markdown, :piece_title, :total_character_count
+        attr_accessor :character_frequency, :total_character_count
 
         def name
           'Character Frequency'
         end
 
         def initialize(piece_title:, piece_markdown:)
-          self.piece_markdown = piece_markdown
-          self.piece_title = piece_title
+          super
+
           self.total_character_count = 0
+          self.character_frequency = {}
         end
 
         def run
-          self.character_frequency = {}
           characters_to_analyze.each do |char|
             self.total_character_count += 1
 
@@ -27,13 +27,13 @@ module Everything
             character_frequency[char] += 1
           end
 
-          self
+          super
         end
 
-        def to_s
+        def create_table
           max_times_used_length = character_frequency.map{|_, times_used| times_used.to_i.to_s.length }.max
 
-          table = Everything::Analysis::Table.new(spaces_to_pad_at_beginning_of_each_line: 4)
+          self.table = Everything::Analysis::Table.new(spaces_to_pad_at_beginning_of_each_line: 4)
           table.add_columns(:character, :uses, :percentage)
 
           table.add_row({ character: 'Total Characters', uses: total_character_count, percentage: '100' })
@@ -44,9 +44,6 @@ module Everything
               percentage_of_total = ((times_used / total_character_count) * 100).ceil(1)
               table.add_row({ character: char, uses: times_used.to_i, percentage: percentage_of_total })
             end
-
-          "  #{name}\n" \
-          "#{table}"
         end
 
         def characters_to_analyze
