@@ -89,15 +89,15 @@ module Everything
 
     def analysis_to_perform
       [
-        Everything::Analysis::Analytics::ParagraphCounter,
-        Everything::Analysis::Analytics::SentenceCounter,
-        Everything::Analysis::Analytics::WordFrequency,
         Everything::Analysis::Analytics::CharacterFrequency,
-        Everything::Analysis::Analytics::WhitespacePercentage,
-        Everything::Analysis::Analytics::PunctuationPercentage,
-        Everything::Analysis::Analytics::SentimentAnalyzer
-        Everything::Analysis::Analytics::WordCounter,
         Everything::Analysis::Analytics::EstimatedReadingTime,
+        Everything::Analysis::Analytics::ParagraphCounter,
+        Everything::Analysis::Analytics::PunctuationPercentage,
+        Everything::Analysis::Analytics::SentenceCounter,
+        Everything::Analysis::Analytics::SentimentAnalyzer,
+        Everything::Analysis::Analytics::WhitespacePercentage,
+        Everything::Analysis::Analytics::WordCounter,
+        Everything::Analysis::Analytics::WordFrequency,
       ]
       # What other analytics?
       # Calculate Flesch Reading Ease or Flesch-Kincaid Grade Levels for each chapter and the book as a whole?
