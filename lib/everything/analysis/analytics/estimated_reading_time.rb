@@ -1,5 +1,12 @@
 # frozen_string_literal: true
 
+# Following example at https://stackoverflow.com/a/28667334/249218 for how to
+# turn minutes into a human readable string
+require 'action_view'
+require 'action_view/helpers'
+require 'active_support/core_ext/numeric/time'
+
+include ActionView::Helpers::DateHelper
 
 module Everything
   class Analysis
@@ -28,8 +35,9 @@ module Everything
 
         def to_s
           table = Everything::Analysis::Table.new(spaces_to_pad_at_beginning_of_each_line: 4)
-          table.add_columns(:estimated_reading_time_in_minutes)
-          table.add_row({ estimated_reading_time_in_minutes: self.estimated_reading_time.to_i.to_s })
+          table.add_columns(:estimated_reading_time)
+          time_in_words = time_ago_in_words(Time.now - estimated_reading_time.minutes)
+          table.add_row({ estimated_reading_time: time_in_words })
 
           "  #{name}\n" \
           "#{table}"

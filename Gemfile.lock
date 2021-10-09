@@ -7,6 +7,12 @@ GIT
 GEM
   remote: https://rubygems.org/
   specs:
+    actionview (6.1.4.1)
+      activesupport (= 6.1.4.1)
+      builder (~> 3.1)
+      erubi (~> 1.4)
+      rails-dom-testing (~> 2.0)
+      rails-html-sanitizer (~> 1.1, >= 1.2.0)
     activesupport (6.1.4.1)
       concurrent-ruby (~> 1.0, >= 1.0.2)
       i18n (>= 1.6, < 2)
@@ -15,16 +21,30 @@ GEM
       zeitwerk (~> 2.3)
     bind-it (0.2.7)
       rjb (~> 1.4.3)
+    builder (3.2.4)
     concurrent-ruby (1.1.9)
+    crass (1.0.6)
     diff-lcs (1.4.4)
     dotenv (2.7.6)
+    erubi (1.10.0)
     everything-core (0.0.13)
       dotenv (~> 2.1)
       fastenv (= 0.0.3)
     fastenv (0.0.3)
     i18n (1.8.10)
       concurrent-ruby (~> 1.0)
+    loofah (2.12.0)
+      crass (~> 1.0.2)
+      nokogiri (>= 1.5.9)
     minitest (5.14.4)
+    nokogiri (1.12.5-x86_64-darwin)
+      racc (~> 1.4)
+    racc (1.5.2)
+    rails-dom-testing (2.0.3)
+      activesupport (>= 4.2.0)
+      nokogiri (>= 1.6)
+    rails-html-sanitizer (1.4.2)
+      loofah (~> 2.3)
     rjb (1.4.9)
     rspec (3.10.0)
       rspec-core (~> 3.10.0)
@@ -55,6 +75,7 @@ PLATFORMS
   x86_64-darwin-20
 
 DEPENDENCIES
+  actionview
   activesupport
   dotenv
   everything-core
