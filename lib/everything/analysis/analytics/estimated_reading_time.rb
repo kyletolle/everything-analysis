@@ -25,7 +25,8 @@ module Everything
         end
 
         def run
-          word_frequency = Everything::Analysis::Analytics::WordCounter.new(piece).run
+          word_counter = piece.get_analytic_by_sym(Analytics::WORD_COUNTER)
+          word_frequency = word_counter.run
 
           self.estimated_reading_time = word_frequency.total_word_count /  AVERAGE_WORDS_READ_PER_MINUTE
 

@@ -18,9 +18,8 @@ module Everything
         end
 
         def sentences
-          Everything::Analysis::Analytics::SentenceCounter
-            .new(piece)
-            .sentences
+          sentence_counter = piece.get_analytic_by_sym(Analytics::SENTENCE_COUNTER)
+          sentence_counter.run.sentences
         end
 
         def run
