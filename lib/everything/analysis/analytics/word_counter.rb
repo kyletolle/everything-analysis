@@ -24,7 +24,9 @@ module Everything
         end
 
         def run
-          self.total_word_count = word_counter.token_count
+          @run_result ||= begin
+            self.total_word_count = word_counter.token_count
+          end
 
           super
         end

@@ -15,7 +15,9 @@ module Everything
         end
 
         def run
-          self.paragraphs_count = piece.raw_markdown.scan("\n\n").count + 1
+          @run_result ||= begin
+            self.paragraphs_count = piece.raw_markdown.scan("\n\n").count + 1
+          end
 
           super
         end

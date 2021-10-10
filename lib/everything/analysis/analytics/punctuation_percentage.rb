@@ -25,13 +25,15 @@ module Everything
         end
 
         def run
-          piece.raw_markdown.each_char do |char|
-            punctuation_type_counts[:total] += 1
+          @run_result ||= begin
+            piece.raw_markdown.each_char do |char|
+              punctuation_type_counts[:total] += 1
 
-            if char.match(/[[:punct:]]/)
-              punctuation_type_counts[:punctuation] += 1
-            else
-              punctuation_type_counts[:non_punctuation] += 1
+              if char.match(/[[:punct:]]/)
+                punctuation_type_counts[:punctuation] += 1
+              else
+                punctuation_type_counts[:non_punctuation] += 1
+              end
             end
           end
 

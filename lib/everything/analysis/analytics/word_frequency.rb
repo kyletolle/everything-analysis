@@ -24,8 +24,10 @@ module Everything
         end
 
         def run
-          self.word_frequency = word_counter.token_frequency
-          self.total_unique_words = word_counter.uniq_token_count
+          @run_result ||= begin
+            self.word_frequency = word_counter.token_frequency
+            self.total_unique_words = word_counter.uniq_token_count
+          end
 
           super
         end

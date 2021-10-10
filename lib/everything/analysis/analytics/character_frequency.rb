@@ -24,11 +24,13 @@ module Everything
         end
 
         def run
-          characters_to_analyze.each do |char|
-            self.total_character_count += 1
+          @run_result ||= begin
+            characters_to_analyze.each do |char|
+              self.total_character_count += 1
 
-            character_frequency[char] ||= 0.0
-            character_frequency[char] += 1
+              character_frequency[char] ||= 0.0
+              character_frequency[char] += 1
+            end
           end
 
           super

@@ -25,13 +25,15 @@ module Everything
         end
 
         def run
-          piece.raw_markdown.each_char do |char|
-            character_type_counts[:total] += 1
+          @run_result ||= begin
+            piece.raw_markdown.each_char do |char|
+              character_type_counts[:total] += 1
 
-            if char.match(/\s/)
-              character_type_counts[:whitespace] += 1
-            else
-              character_type_counts[:non_whitespace] += 1
+              if char.match(/\s/)
+                character_type_counts[:whitespace] += 1
+              else
+                character_type_counts[:non_whitespace] += 1
+              end
             end
           end
 
