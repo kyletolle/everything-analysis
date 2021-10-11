@@ -31,7 +31,7 @@ module Everything
 
     # TODO: Update this name...
     def completed_analytics
-      @completed_analytics ||= pieces_to_analyze.each do |piece|
+      @completed_analytics ||= individual_pieces.each do |piece|
         Analytics::TO_RUN.map do |analysis_klass|
           piece.add_analytic(analysis_klass)
         end
@@ -64,15 +64,15 @@ module Everything
 
     def all_novel_text_piece
       @all_novel_text_piece ||= Everything::Piece.new('/tmp/all_pieces').tap do |piece|
-        all_markdown = pieces_to_analyze.map(&:raw_markdown).join('')
+        all_markdown = individual_pieces.map(&:raw_markdown).join('')
         piece.raw_markdown = "# All Pieces at Once\n\n#{all_markdown}"
       end
     end
 
     # Other
 
-    def pieces_to_analyze
-      @pieces_to_analyze ||= piece_paths.map do |piece_path|
+    def individual_pieces
+      @individual_pieces ||= piece_paths.map do |piece_path|
         Everything::Piece.new(piece_path)
       end
     end
