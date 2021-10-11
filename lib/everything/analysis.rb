@@ -10,42 +10,32 @@ require_relative './piece/analytics'
 module Everything
   class Analysis
     def run_and_print
-      # puts analytics_results
+      puts analytics_results
       puts all_results
     end
 
     # Individual Pieces
 
     def analytics_results
-      completed_analytics.map do |piece_analytics|
-        piece_title = piece_analytics[:piece_title]
-        analytics_result = piece_analytics[:analytics]
+      completed_analytics.map do |piece|
+        analytics_result = piece
+          .analytics
+          .values
           .map(&:to_s)
           .join("\n\n")
 
-        "Analysis for Piece Titled: `#{piece_title}`\n\n" \
+        "Analysis for Piece Titled: `#{piece.title}`\n\n" \
         "#{analytics_result}\n\n"
       end
     end
 
+    # TODO: Update this name...
     def completed_analytics
-      @completed_analytics ||= pieces_data_to_analyze.map do |piece_data|
-        piece_title = piece_data[:piece_title]
-        piece_markdown = piece_data[:piece_markdown]
-        analytics = Analytics::TO_RUN.map do |analysis_klass|
-          analysis_klass.new(piece).run
+      @completed_analytics ||= pieces_to_analyze.each do |piece|
+        Analytics::TO_RUN.map do |analysis_klass|
+          piece.add_analytic(analysis_klass)
         end
-        { piece_title: piece_title, analytics: analytics }
-      end.flatten
-    end
-
-    # TODO: update this
-    def pieces_data_to_analyze
-      pieces_to_analyze.map do |piece|
-        {
-          piece_title: piece.title,
-          piece_markdown: piece.raw_markdown
-        }
+        piece.run_analytics
       end
     end
 
@@ -65,8 +55,7 @@ module Everything
 
     # TODO: Update this name...
     def completed_analytics_for_all
-      # TODO: Add each of the analytics to the piece, then run all of them
-      analytics = Analytics::TO_RUN.map do |analysis_klass|
+      Analytics::TO_RUN.each do |analysis_klass|
         all_novel_text_piece.add_analytic(analysis_klass)
       end
       all_novel_text_piece.run_analytics
