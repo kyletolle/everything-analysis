@@ -56,14 +56,14 @@ module Everything
     # TODO: Update this name...
     def completed_analytics_for_all
       Analytics::TO_RUN.each do |analysis_klass|
-        all_novel_text_piece.add_analytic(analysis_klass)
+        all_text_in_one_piece.add_analytic(analysis_klass)
       end
-      all_novel_text_piece.run_analytics
-      all_novel_text_piece
+      all_text_in_one_piece.run_analytics
+      all_text_in_one_piece
     end
 
-    def all_novel_text_piece
-      @all_novel_text_piece ||= Everything::Piece.new('/tmp/all_pieces').tap do |piece|
+    def all_text_in_one_piece
+      @all_text_in_one_piece ||= Everything::Piece.new('/tmp/all_pieces').tap do |piece|
         all_markdown = individual_pieces.map(&:raw_markdown).join('')
         piece.raw_markdown = "# All Pieces at Once\n\n#{all_markdown}"
       end
