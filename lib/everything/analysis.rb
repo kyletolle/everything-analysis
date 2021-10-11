@@ -10,14 +10,12 @@ require_relative './piece/analytics'
 module Everything
   class Analysis
     def run_and_print
-      puts analytics_results
-      puts all_results
+      run_analytics
+      puts analytics_results_string
     end
 
-    # Individual Pieces
-
-    def analytics_results
-      completed_analytics.map do |piece|
+    def analytics_results_string
+      individual_and_combined_pieces.map do |piece|
         analytics_result = piece
           .analytics
           .values
@@ -29,9 +27,8 @@ module Everything
       end
     end
 
-    # TODO: Update this name...
-    def completed_analytics
-      @completed_analytics ||= individual_pieces.each do |piece|
+    def run_analytics
+      individual_and_combined_pieces.each do |piece|
         Analytics::TO_RUN.map do |analysis_klass|
           piece.add_analytic(analysis_klass)
         end
@@ -39,27 +36,8 @@ module Everything
       end
     end
 
-    # All Pieces
-
-    def all_results
-      piece = completed_analytics_for_all
-      analytics_result = piece
-        .analytics
-        .values
-        .map(&:to_s)
-        .join("\n\n")
-
-      "Analysis for Piece Titled: `#{piece.title}`\n\n" \
-      "#{analytics_result}\n\n"
-    end
-
-    # TODO: Update this name...
-    def completed_analytics_for_all
-      Analytics::TO_RUN.each do |analysis_klass|
-        all_text_in_one_piece.add_analytic(analysis_klass)
-      end
-      all_text_in_one_piece.run_analytics
-      all_text_in_one_piece
+    def individual_and_combined_pieces
+      @individual_and_combined_pieces ||= individual_pieces + [all_text_in_one_piece]
     end
 
     def all_text_in_one_piece
@@ -68,8 +46,6 @@ module Everything
         piece.raw_markdown = "# All Pieces at Once\n\n#{all_markdown}"
       end
     end
-
-    # Other
 
     def individual_pieces
       @individual_pieces ||= piece_paths.map do |piece_path|
