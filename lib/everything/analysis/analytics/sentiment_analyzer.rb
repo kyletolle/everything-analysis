@@ -6,6 +6,10 @@ require_relative './sentence_counter'
 module Everything
   class Analysis
     module Analytics
+      # TODO: Split this into 2. Want to make sure this can reuse the to_s stuff
+      # from the base class. But how do we allow it to reuse the sentiment
+      # analysis from the 3rd party lib so that we don't need to run that
+      # analysis twice? Make a SentimentBase class?
       class SentimentAnalyzer < AnalyticBase
         def self.to_sym
           Analytics::SENTIMENT_ANALYZER

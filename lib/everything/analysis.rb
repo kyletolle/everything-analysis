@@ -14,6 +14,9 @@ module Everything
       puts analytics_results_string
     end
 
+    # TODO: Extract a "ConsoleOutput" class that's responsible for doing this
+    # transformation here. So we can lay the groundwork for a HtmlOutput class
+    # in the future that will allow us to start making graphs.
     def analytics_results_string
       individual_and_combined_pieces.map do |piece|
         analytics_result = piece
